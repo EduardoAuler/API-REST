@@ -16,7 +16,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     boolean existsByEmail(String email);
 
-//TESTANDO JPQL E QUERYSBYNAME
+//TESTANDO Query derivada e JPQL Query
 
     //acha usuario pelo final do nome
     List<User> findByNameEndingWithIgnoreCase(String finalLetra);
