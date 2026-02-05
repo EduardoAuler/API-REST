@@ -31,11 +31,11 @@ public class User {
     @Column(nullable = false)
     private Integer age;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING) @Column(name = "marital_status")
     private MaritalStatus maritalStatus;
 
     @CreationTimestamp
-    @Column(updatable = false)
+    @Column(updatable = false, name = "created_at")
     private LocalDateTime createdAt;
 
 }
