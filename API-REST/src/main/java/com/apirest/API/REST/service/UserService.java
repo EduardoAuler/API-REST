@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+@Service//fala com entity
 public class UserService {
 
     private final UserRepository repository;
@@ -44,7 +44,7 @@ public class UserService {
         repository.deleteById(id);
     }
 
-    @Transactional
+    @Transactional//só vai fazer essa operação se conseguir fazer isso com todos, caso uma troca de errado ele cancela a operação
     public User updateUser(Long id,User dados){
         User user = findUserById(id);
         if (!user.getEmail().equals(dados.getEmail()) &&
