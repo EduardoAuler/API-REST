@@ -7,7 +7,11 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class UserMapper {
-    private final ObjectMapper objectMapper;
+   /*
+
+        INICIALMENTE FIZ ASSIM, MAS ENFRENTEI ERROS DE COMPILAR, ELE NAO TAVA RECONHECENDO O MAPPER COMO COMPONENT, ENT FIZ SEM ELE
+
+   private final ObjectMapper objectMapper;
 
     public UserMapper(ObjectMapper objectMapper){
         this.objectMapper = objectMapper;
@@ -19,6 +23,17 @@ public class UserMapper {
 
     public UserDTO toDTO(User user){
         return objectMapper.convertValue(user, UserDTO.class);
+    }*/
+
+
+    public User toEntity(UserDTO dto){
+        return new User(dto.id(), dto.name(), dto.email(), dto.age(),
+                dto.maritalStatus(), dto.createdAt());
+    }
+
+    public UserDTO toDTO(User user){
+        return new UserDTO(user.getId(), user.getName(), user.getEmail(), user.getAge(),
+                user.getMaritalStatus(), user.getCreatedAt());
     }
 
 }
