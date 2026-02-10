@@ -56,4 +56,11 @@ public class UserController {//fala com DTO
 
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/users/email")
+    public ResponseEntity<List<String>> getAllEmail(){
+        List<String> emails = service.getAllEmail();
+
+        return ResponseEntity.ok(emails);
+    }
 }

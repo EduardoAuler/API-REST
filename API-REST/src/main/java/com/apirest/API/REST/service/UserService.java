@@ -59,6 +59,7 @@ public class UserService {
     }
 
 
-
-
+    public List<String> getAllEmail() {
+        return repository.listaTodosEmail();
+    }
 }

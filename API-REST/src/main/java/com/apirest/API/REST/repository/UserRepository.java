@@ -64,4 +64,13 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query("SELECT u from User u WHERE u.createdAt BETWEEN :l1 AND :l2")
     List<User> usuariosEntreDuasDatas(LocalDateTime l1, LocalDateTime l2);
+
+
+
+    List<String> findAllEmailsBy();
+
+    @Query("SELECT u.email from User u")
+    List<String> listaTodosEmail();
+
+
 }
