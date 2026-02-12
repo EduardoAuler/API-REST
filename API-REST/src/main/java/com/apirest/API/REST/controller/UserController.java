@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-//@RequestMapping("/users") pode ser assim caso todos request usarem mesma url
+@RequestMapping("/users")
 public class UserController {//fala com DTO
 
     private final UserService service;
@@ -23,7 +23,7 @@ public class UserController {//fala com DTO
         this.mapper = mapper;
     }
 
-    @GetMapping("/users")
+    @GetMapping
     public ResponseEntity<List<UserDTO>> findAll(){
         List<UserDTO> users = service.getAll().stream()
                 .map(mapper::toDTO)
@@ -33,14 +33,14 @@ public class UserController {//fala com DTO
     }
 
 
-    @GetMapping("/users/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<UserDTO> findById(@PathVariable long id){
         UserDTO user = mapper.toDTO(service.findUserById(id));
 
         return ResponseEntity.ok(user);
     }
 
-    @PostMapping("/users")
+    @PostMapping
     public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO dto){
         User user = mapper.toEntity(dto);
         User saved = service.createUser(user);
@@ -50,14 +50,14 @@ public class UserController {//fala com DTO
     }
 
 
-    @DeleteMapping("/users/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable long id){
         service.deleteUser(id);
 
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/users/email")
+    @GetMapping("/email")
     public ResponseEntity<List<String>> getAllEmail(){
         List<String> emails = service.getAllEmail();
 
