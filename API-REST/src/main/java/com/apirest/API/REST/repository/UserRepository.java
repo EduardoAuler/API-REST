@@ -28,10 +28,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
 
     //usuarios maiores que x idade
-    List<User> findByAgeGreaterThan(int age);
+    List<User> findByAgeGreaterThan(Integer age);
 
     @Query("SELECT u from User u WHERE u.age > :idade")
-    List<User> usuariosMairesIdade(int idade);
+    List<User> usuariosMairesIdade(Integer idade);
 
 
 
@@ -44,10 +44,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
 
     //usuarios menores que x idade
-    List<User> findByAgeLessThan(int age);
+    List<User> findByAgeLessThan(Integer age);
 
     @Query("SELECT u from User u WHERE u.age < :idade")
-    List<User> usuariosMenoresIdade(int idade);
+    List<User> usuariosMenoresIdade(Integer idade);
 
 
 

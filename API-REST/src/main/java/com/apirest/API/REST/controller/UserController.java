@@ -63,4 +63,14 @@ public class UserController {//fala com DTO
 
         return ResponseEntity.ok(emails);
     }
+
+    @GetMapping("/age/{idade}")
+    public ResponseEntity<List<UserDTO>> getByGreaterAge(@PathVariable Integer idade){
+        List<UserDTO> response = service.getUserMaioresIdade(idade).stream()
+                .map(mapper::toDTO)
+                .toList();
+
+        return ResponseEntity.ok(response);
+    }
+
 }

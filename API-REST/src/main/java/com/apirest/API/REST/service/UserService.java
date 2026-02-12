@@ -62,4 +62,8 @@ public class UserService {
     public List<String> getAllEmail() {
         return repository.listaTodosEmail();
     }
+
+    public List<User> getUserMaioresIdade(Integer age){
+        return repository.findByAgeGreaterThan(age);
+    }
 }
