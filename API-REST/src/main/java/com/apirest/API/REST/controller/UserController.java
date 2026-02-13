@@ -5,10 +5,12 @@ import com.apirest.API.REST.dto.UserDTO;
 import com.apirest.API.REST.mapper.UserMapper;
 import com.apirest.API.REST.model.User;
 import com.apirest.API.REST.service.UserService;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -69,6 +71,15 @@ public class UserController {//fala com DTO
         List<UserDTO> response = service.getUserMaioresIdade(idade).stream()
                 .map(mapper::toDTO)
                 .toList();
+
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/created-at-after")
+    public ResponseEntity<List<UserDTO>> getByCreatedAtAfter(@RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+                                                             LocalDateTime localDateTime){
+        List<UserDTO> response = service.getUserAfterDate(localDateTime)
+                .stream().map(mapper::toDTO).toList();
 
         return ResponseEntity.ok(response);
     }

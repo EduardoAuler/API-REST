@@ -7,6 +7,7 @@ import com.apirest.API.REST.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service//fala com entity
@@ -66,4 +67,13 @@ public class UserService {
     public List<User> getUserMaioresIdade(Integer age){
         return repository.findByAgeGreaterThan(age);
     }
+
+    public List<User> getUserAfterDate(LocalDateTime localDateTime){
+        List<User> users = repository.findByCreatedAtAfter(localDateTime);
+
+        if (users.isEmpty()) throw new UserNotFoundException("Nenhum usuário criado após essa data");
+
+        return users;
+    }
+
 }
