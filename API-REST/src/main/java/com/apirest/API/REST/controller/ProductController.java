@@ -51,4 +51,20 @@ public class ProductController {
         return ResponseEntity.ok(response);
     }
 
+    @PatchMapping("/{id}/increase-stock")
+    public ResponseEntity<ProductDTO> addStockInProduct(@PathVariable Long id, @RequestParam Integer value){
+        Product product = service.increaseStock(id, value);
+        ProductDTO response = mapper.toDTO(product);
+
+        return ResponseEntity.ok(response);
+    }
+
+
+    @PatchMapping("/{id}/decrease-stock")
+    public ResponseEntity<ProductDTO> subStockInProduct(@PathVariable Long id, @RequestParam Integer value){
+        Product product = service.decreaseStock(id,value);
+        ProductDTO response = mapper.toDTO(product);
+
+        return ResponseEntity.ok(response);
+    }
 }
