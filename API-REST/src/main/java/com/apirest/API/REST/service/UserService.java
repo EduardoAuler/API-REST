@@ -2,12 +2,14 @@ package com.apirest.API.REST.service;
 
 import com.apirest.API.REST.exception.EmailAlreadyExistsException;
 import com.apirest.API.REST.exception.UserNotFoundException;
+import com.apirest.API.REST.model.MaritalStatus;
 import com.apirest.API.REST.model.User;
 import com.apirest.API.REST.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 
 @Service//fala com entity
@@ -76,4 +78,11 @@ public class UserService {
         return users;
     }
 
+    public List<User> getUsersByMaritalStatus(MaritalStatus maritalStatus) {
+        List<User> users = repository.findByMaritalStatus(maritalStatus);
+
+        if (users.isEmpty()) throw new UserNotFoundException("Nenhum usuário com esse estado civil");
+
+        return users;
+    }
 }

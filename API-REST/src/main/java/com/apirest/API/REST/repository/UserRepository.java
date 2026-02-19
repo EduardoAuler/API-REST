@@ -73,4 +73,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
     List<String> listaTodosEmail();
 
 
+    List<User> findByMaritalStatus(MaritalStatus maritalStatus);
 }
