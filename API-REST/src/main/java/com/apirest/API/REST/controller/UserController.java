@@ -3,6 +3,7 @@ package com.apirest.API.REST.controller;
 
 import com.apirest.API.REST.dto.UserDTO;
 import com.apirest.API.REST.mapper.UserMapper;
+import com.apirest.API.REST.model.MaritalStatus;
 import com.apirest.API.REST.model.User;
 import com.apirest.API.REST.service.UserService;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -79,6 +80,14 @@ public class UserController {//fala com DTO
     public ResponseEntity<List<UserDTO>> getByCreatedAtAfter(@RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
                                                              LocalDateTime localDateTime){
         List<UserDTO> response = service.getUserAfterDate(localDateTime)
+                .stream().map(mapper::toDTO).toList();
+
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/marital-status")
+    public ResponseEntity<List<UserDTO>> getByMaritalStatus(@RequestParam("ms") MaritalStatus maritalStatus){
+        List<UserDTO> response = service.getUsersByMaritalStatus(maritalStatus)
                 .stream().map(mapper::toDTO).toList();
 
         return ResponseEntity.ok(response);
