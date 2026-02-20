@@ -7,6 +7,7 @@ import com.apirest.API.REST.model.ProductType;
 import com.apirest.API.REST.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.apirest.API.REST.exception.InvalidStockValueException;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -59,12 +60,12 @@ public class ProductService {
                 .orElseThrow(() -> new ProductNotFoundException("Produto não encontrado"));
 
         if (value <= 0) {
-            throw new IllegalArgumentException("Valor deve ser maior que zero");
+            throw new InvalidStockValueException("Valor deve ser maior que zero");
         }
 
         product.setStock(product.getStock() + value);
 
-        return repository.save(product);
+        return product;
     }
 
     @Transactional
@@ -74,15 +75,15 @@ public class ProductService {
                 .orElseThrow(() -> new ProductNotFoundException("Produto não encontrado"));
 
         if (value <= 0){
-            throw new IllegalArgumentException("Valor deve ser maior que 0");
+            throw new InvalidStockValueException("Valor deve ser maior que 0");
         }
 
         if ((product.getStock() - value) < 0){
-            throw new IllegalArgumentException("Valor deve ser menor ou igual ao valor no estoque");
+            throw new InvalidStockValueException("Valor deve ser menor ou igual ao valor no estoque");
         }
 
         product.setStock(product.getStock() - value);
 
-        return repository.save(product);
+        return product;
     }
 }
